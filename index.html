@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NARSGON | National Association of Retirees of State Government of Nigeria</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#f8fafc;
+overflow-x:hidden;
+}
+
+.hero-bg{
+background:
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1600&q=80');
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+}
+
+.glass{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,.15);
+}
+
+.gradient-text{
+background:linear-gradient(to right,#22c55e,#0ea5e9);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.section-padding{
+padding:100px 20px;
+}
+
+.news-card:hover,
+.gallery-card:hover,
+.leader-card:hover{
+transform:translateY(-10px);
+}
+
+.news-card,
+.gallery-card,
+.leader-card{
+transition:.4s;
+}
+
+.backToTop{
+position:fixed;
+bottom:30px;
+right:30px;
+width:55px;
+height:55px;
+border-radius:50%;
+background:#16a34a;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+display:none;
+z-index:999;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+}
+
+.counter-box{
+transition:.3s;
+}
+
+.counter-box:hover{
+transform:scale(1.05);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- BREAKING NEWS -->
+
+<div class="bg-red-600 text-white py-2 text-sm">
+
+<marquee>
+
+📢 NARSGON National Conference Scheduled for October 2026 |
+Pension Review Discussions Ongoing |
+Membership Registration Open Nationwide |
+Retirees Welfare Initiative Launching Soon
+
+</marquee>
+
+</div>
+
+<!-- NAVIGATION -->
+
+<nav class="fixed top-0 left-0 w-full bg-white shadow-lg z-50">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="flex justify-between items-center py-4">
+
+<div class="flex items-center gap-3">
+
+<img
+src="logo.png"
+alt="NARSGON"
+class="w-14 h-14 object-contain">
+
+<div>
+
+<h2 class="font-bold text-green-700 text-xl">
+NARSGON
+</h2>
+
+<p class="text-xs text-gray-500">
+National Association of Retirees
+</p>
+
+</div>
+
+</div>
+
+<!-- DESKTOP MENU -->
+
+<div class="hidden md:flex gap-8 font-medium">
+
+<a href="#home" class="hover:text-green-600">
+Home
+</a>
+
+<a href="#about" class="hover:text-green-600">
+About
+</a>
+
+<a href="#leadership" class="hover:text-green-600">
+Leadership
+</a>
+
+<a href="#news" class="hover:text-green-600">
+News
+</a>
+
+<a href="#gallery" class="hover:text-green-600">
+Gallery
+</a>
+
+<a href="#contact" class="hover:text-green-600">
+Contact
+</a>
+
+</div>
+
+<!-- MOBILE BUTTON -->
+
+<button
+id="menuBtn"
+class="md:hidden text-3xl p-2">
+☰
+</button>
+</div>
+
+</div>
+
+</nav>
+
+<!-- MOBILE MENU -->
+
+<div
+id="mobileMenu"
+class="hidden fixed top-20 left-0 w-full bg-white shadow-lg z-40">
+
+<div class="flex flex-col p-6 gap-5">
+
+<a href="#home">Home</a>
+<a href="#about">About</a>
+<a href="#leadership">Leadership</a>
+<a href="#news">News</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Contact</a>
+
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<section
+id="home"
+class="hero-bg min-h-screen flex items-center">
+
+<div class="max-w-7xl mx-auto px-6 text-center text-white">
+
+<div class="glass p-10 rounded-3xl">
+
+<h1 class="text-4xl md:text-7xl font-extrabold">
+
+Welcome To
+
+<span class="gradient-text">
+NARSGON
+</span>
+
+</h1>
+
+<p class="mt-8 text-lg md:text-xl max-w-4xl mx-auto">
+
+The National Association of Retirees of State Government of Nigeria
+is committed to protecting the welfare, dignity and interests of
+retired state government workers across Nigeria.
+
+</p>
+
+<div class="mt-10 flex flex-wrap justify-center gap-4">
+
+<a
+href="retirenews.html"
+class="bg-green-600 hover:bg-green-700 px-8 py-4 rounded-full">
+
+News Page
+
+</a>
+
+<a
+href="#contact"
+class="bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full">
+
+Contact Us
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section
+id="about"
+class="section-padding bg-white">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="text-center mb-16">
+
+<h2 class="text-5xl font-bold">
+About Us
+</h2>
+
+<div class="w-24 h-1 bg-green-600 mx-auto mt-4"></div>
+
+</div>
+
+<div class="grid md:grid-cols-2 gap-10 items-center">
+
+<div>
+
+<img
+src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80"
+class="rounded-3xl shadow-2xl">
+
+</div>
+
+<div>
+
+<h3 class="text-3xl font-bold mb-6">
+Who We Are
+</h3>
+
+<p class="text-lg text-gray-700 leading-relaxed">
+
+The National Association of Retirees of State Government of Nigeria
+(NARSGON) is a body established to represent, protect and promote
+the interests of retired employees of state governments throughout
+Nigeria.
+
+<br><br>
+
+The association fosters unity, advocates for improved pension
+administration, supports welfare initiatives and promotes the
+well-being of retirees nationwide.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- VISION & MISSION -->
+
+<section
+class="section-padding bg-gradient-to-r from-green-700 to-blue-800 text-white">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="grid md:grid-cols-2 gap-10">
+
+<div class="glass p-10 rounded-3xl">
+
+<h3 class="text-4xl font-bold mb-6">
+
+Our Vision
+
+</h3>
+
+<p>
+
+To be the foremost voice and support network for retirees,
+ensuring dignity, security and improved well-being for all
+retired state government workers in Nigeria.
+
+</p>
+
+</div>
+
+<div class="glass p-10 rounded-3xl">
+
+<h3 class="text-4xl font-bold mb-6">
+
+Our Mission
+
+</h3>
+
+<p>
+
+To advocate for retirees, promote unity, engage stakeholders
+on pension matters and provide support that improves the lives
+of retired state government employees.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- STATISTICS -->
+
+<section class="section-padding bg-white">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="grid md:grid-cols-4 gap-8 text-center">
+
+<div class="counter-box bg-white p-8 rounded-3xl shadow-lg">
+
+<h3 class="counter text-5xl font-bold text-green-600"
+data-target="36">0</h3>
+
+<p class="mt-4">
+States Represented
+</p>
+
+</div>
+
+<div class="counter-box bg-white p-8 rounded-3xl shadow-lg">
+
+<h3 class="counter text-5xl font-bold text-blue-600"
+data-target="50000">0</h3>
+
+<p class="mt-4">
+Members Nationwide
+</p>
+
+</div>
+
+<div class="counter-box bg-white p-8 rounded-3xl shadow-lg">
+
+<h3 class="counter text-5xl font-bold text-purple-600"
+data-target="120">0</h3>
+
+<p class="mt-4">
+Advocacy Programs
+</p>
+
+</div>
+
+<div class="counter-box bg-white p-8 rounded-3xl shadow-lg">
+
+<h3 class="counter text-5xl font-bold text-red-600"
+data-target="25">0</h3>
+
+<p class="mt-4">
+Years of Service
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- LEADERSHIP START -->
+
+<section
+id="leadership"
+class="section-padding bg-slate-100">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="text-center mb-16">
+
+<h2 class="text-5xl font-bold">
+
+National Leadership
+
+</h2>
+
+<div class="w-24 h-1 bg-green-600 mx-auto mt-4"></div>
+
+</div>
+
+<div class="grid md:grid-cols-3 gap-10">
+
+<div class="leader-card bg-white rounded-3xl shadow-lg overflow-hidden">
+
+<img
+src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=700"
+class="w-full h-72 object-cover">
+
+<div class="p-6">
+
+<h3 class="text-2xl font-bold">
+
+National President
+
+</h3>
+
+<p class="text-green-600">
+NARSGON Executive
+</p>
+
+</div>
+
+</div>
+
+<div class="leader-card bg-white rounded-3xl shadow-lg overflow-hidden">
+
+<img
+src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700"
+class="w-full h-72 object-cover">
+
+<div class="p-6">
+
+<h3 class="text-2xl font-bold">
+National Secretary
+</h3>
+
+<p class="text-green-600">
+NARSGON Executive
+</p>
+
+</div>
+
+</div>
+
+<div class="leader-card bg-white rounded-3xl shadow-lg overflow-hidden">
+
+<img
+src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700"
+class="w-full h-72 object-cover">
+
+<div class="p-6">
+
+<h3 class="text-2xl font-bold">
+National Treasurer
+</h3>
+
+<p class="text-green-600">
+NARSGON Executive
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- NEWS SECTION -->
+
+<section id="news" class="section-padding bg-white">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="text-center mb-16">
+
+<h2 class="text-5xl font-bold">
+Latest News
+</h2>
+
+<div class="w-24 h-1 bg-green-600 mx-auto mt-4"></div>
+
+</div>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="news-card bg-white rounded-3xl shadow-lg overflow-hidden">
+
+<img
+src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1000"
+class="w-full h-60 object-cover">
+
+<div class="p-6">
+
+<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full">
+Pension
+</span>
+
+<h3 class="text-2xl font-bold mt-4">
+Pension Review Meeting Held
+</h3>
+
+<p class="text-gray-500 mt-2">
+June 2026
+</p>
+
+<p class="mt-4">
+National stakeholders met to discuss pension reforms.
+</p>
+
+<button
+class="mt-4 bg-green-600 text-white px-5 py-2 rounded-full">
+Read More
+</button>
+
+</div>
+
+</div>
+
+<div class="news-card bg-white rounded-3xl shadow-lg overflow-hidden">
+
+<img
+src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=1000"
+class="w-full h-60 object-cover">
+
+<div class="p-6">
+
+<span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full">
+Conference
+</span>
+
+<h3 class="text-2xl font-bold mt-4">
+National Conference Scheduled
+</h3>
+
+<p class="text-gray-500 mt-2">
+July 2026
+</p>
+
+<p class="mt-4">
+Preparations continue for the annual conference.
+</p>
+
+<button
+class="mt-4 bg-blue-600 text-white px-5 py-2 rounded-full">
+Read More
+</button>
+
+</div>
+
+</div>
+
+<div class="news-card bg-white rounded-3xl shadow-lg overflow-hidden">
+
+<img
+src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1000"
+class="w-full h-60 object-cover">
+
+<div class="p-6">
+
+<span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full">
+Welfare
+</span>
+
+<h3 class="text-2xl font-bold mt-4">
+Healthcare Initiative Launch
+</h3>
+
+<p class="text-gray-500 mt-2">
+August 2026
+</p>
+
+<p class="mt-4">
+Healthcare support programme unveiled nationwide.
+</p>
+
+<button
+class="mt-4 bg-purple-600 text-white px-5 py-2 rounded-full">
+Read More
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- EVENTS -->
+
+<section class="section-padding bg-slate-100">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="text-center mb-16">
+
+<h2 class="text-5xl font-bold">
+Upcoming Events
+</h2>
+
+<div class="w-24 h-1 bg-green-600 mx-auto mt-4"></div>
+
+</div>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="bg-white rounded-3xl shadow-lg p-8">
+
+<h3 class="text-2xl font-bold">
+October 2026
+</h3>
+
+<p class="mt-4">
+National Delegates Conference
+</p>
+
+</div>
+
+<div class="bg-white rounded-3xl shadow-lg p-8">
+
+<h3 class="text-2xl font-bold">
+November 2026
+</h3>
+
+<p class="mt-4">
+Retirees Welfare Summit
+</p>
+
+</div>
+
+<div class="bg-white rounded-3xl shadow-lg p-8">
+
+<h3 class="text-2xl font-bold">
+December 2026
+</h3>
+
+<p class="mt-4">
+End Of Year Celebration
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- TESTIMONIALS -->
+
+<section class="section-padding bg-white">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="text-center mb-16">
+
+<h2 class="text-5xl font-bold">
+Testimonials
+</h2>
+
+<div class="w-24 h-1 bg-green-600 mx-auto mt-4"></div>
+
+</div>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="bg-slate-50 p-8 rounded-3xl shadow">
+
+<p>
+"NARSGON has been a strong advocate for retirees across Nigeria."
+</p>
+
+<h4 class="mt-6 font-bold">
+Retired Civil Servant
+</h4>
+
+</div>
+
+<div class="bg-slate-50 p-8 rounded-3xl shadow">
+
+<p>
+"The welfare initiatives have greatly improved our lives."
+</p>
+
+<h4 class="mt-6 font-bold">
+Association Member
+</h4>
+
+</div>
+
+<div class="bg-slate-50 p-8 rounded-3xl shadow">
+
+<p>
+"The association gives retirees a united voice."
+</p>
+
+<h4 class="mt-6 font-bold">
+State Coordinator
+</h4>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section id="gallery" class="section-padding bg-slate-100">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="text-center mb-16">
+
+<h2 class="text-5xl font-bold">
+Photo Gallery
+</h2>
+
+<div class="w-24 h-1 bg-green-600 mx-auto mt-4"></div>
+
+</div>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<img
+src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000"
+class="gallery-card rounded-3xl shadow-lg">
+
+<img
+src="https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1000"
+class="gallery-card rounded-3xl shadow-lg">
+
+<img
+src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1000"
+class="gallery-card rounded-3xl shadow-lg">
+
+<img
+src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1000"
+class="gallery-card rounded-3xl shadow-lg">
+
+<img
+src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1000"
+class="gallery-card rounded-3xl shadow-lg">
+
+<img
+src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1000"
+class="gallery-card rounded-3xl shadow-lg">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- STATE CHAPTERS -->
+
+<section class="section-padding bg-white">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="text-center mb-16">
+
+<h2 class="text-5xl font-bold">
+State Chapters
+</h2>
+
+<div class="w-24 h-1 bg-green-600 mx-auto mt-4"></div>
+
+</div>
+
+<div class="grid md:grid-cols-4 gap-6">
+
+<div class="bg-green-50 p-6 rounded-2xl text-center">Lagos</div>
+<div class="bg-green-50 p-6 rounded-2xl text-center">Bayelsa</div>
+<div class="bg-green-50 p-6 rounded-2xl text-center">Rivers</div>
+<div class="bg-green-50 p-6 rounded-2xl text-center">Abuja</div>
+<div class="bg-green-50 p-6 rounded-2xl text-center">Kaduna</div>
+<div class="bg-green-50 p-6 rounded-2xl text-center">Kano</div>
+<div class="bg-green-50 p-6 rounded-2xl text-center">Enugu</div>
+<div class="bg-green-50 p-6 rounded-2xl text-center">Oyo</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- MEMBERSHIP CTA -->
+
+<section class="section-padding bg-gradient-to-r from-green-600 to-blue-700 text-white">
+
+<div class="max-w-5xl mx-auto text-center">
+
+<h2 class="text-5xl font-bold mb-6">
+Become A Member
+</h2>
+
+<p class="text-xl max-w-3xl mx-auto mb-10">
+
+Join thousands of retirees across Nigeria and enjoy access to
+welfare programs, advocacy initiatives, information updates,
+and community support.
+
+</p>
+
+<button
+onclick="showMembershipAlert()"
+class="bg-white text-green-700 px-10 py-4 rounded-full font-bold hover:scale-105 transition">
+
+Register Now
+
+</button>
+
+</div>
+
+</section>
+
+<!-- NEWSLETTER -->
+
+<section class="section-padding bg-white">
+
+<div class="max-w-4xl mx-auto text-center">
+
+<h2 class="text-5xl font-bold mb-6">
+Newsletter Subscription
+</h2>
+
+<p class="text-gray-600 mb-8">
+
+Subscribe to receive pension updates,
+association news and important announcements.
+
+</p>
+
+<div class="flex flex-col md:flex-row gap-4">
+
+<input
+id="newsletterEmail"
+type="email"
+placeholder="Enter Your Email Address"
+class="flex-1 border-2 border-gray-200 rounded-full px-6 py-4 outline-none focus:border-green-600">
+
+<button
+onclick="subscribeNewsletter()"
+class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-full">
+
+Subscribe
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section
+id="contact"
+class="section-padding bg-slate-100">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="text-center mb-16">
+
+<h2 class="text-5xl font-bold">
+Contact Us
+</h2>
+
+<div class="w-24 h-1 bg-green-600 mx-auto mt-4"></div>
+
+</div>
+
+<div class="grid md:grid-cols-2 gap-10">
+
+<div class="bg-white p-10 rounded-3xl shadow-lg">
+
+<h3 class="text-3xl font-bold mb-6">
+
+Get In Touch
+
+</h3>
+
+<p class="mb-4">
+📧 Email: info@narsgon.org
+</p>
+
+<p class="mb-4">
+📞 Phone: +234 XXX XXX XXXX
+</p>
+
+<p class="mb-4">
+📍 Nigeria
+</p>
+
+<div class="flex gap-4 mt-8">
+
+<a href="#" class="text-3xl text-blue-600">
+<i class="fab fa-facebook"></i>
+</a>
+
+<a href="#" class="text-3xl text-sky-500">
+<i class="fab fa-twitter"></i>
+</a>
+
+<a href="#" class="text-3xl text-pink-600">
+<i class="fab fa-instagram"></i>
+</a>
+
+<a href="#" class="text-3xl text-green-600">
+<i class="fab fa-whatsapp"></i>
+</a>
+
+</div>
+
+</div>
+
+<div class="bg-white p-10 rounded-3xl shadow-lg">
+
+<form id="contactForm">
+
+<div class="mb-5">
+
+<input
+type="text"
+placeholder="Full Name"
+required
+class="w-full border-2 border-gray-200 rounded-xl px-4 py-4">
+
+</div>
+
+<div class="mb-5">
+
+<input
+type="email"
+placeholder="Email Address"
+required
+class="w-full border-2 border-gray-200 rounded-xl px-4 py-4">
+
+</div>
+
+<div class="mb-5">
+
+<input
+type="text"
+placeholder="Subject"
+required
+class="w-full border-2 border-gray-200 rounded-xl px-4 py-4">
+
+</div>
+
+<div class="mb-5">
+
+<textarea
+placeholder="Your Message"
+rows="5"
+required
+class="w-full border-2 border-gray-200 rounded-xl px-4 py-4"></textarea>
+
+</div>
+
+<button
+type="submit"
+class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl">
+
+Send Message
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="bg-slate-900 text-white py-16">
+
+<div class="max-w-7xl mx-auto px-6">
+
+<div class="grid md:grid-cols-4 gap-10">
+
+<div>
+
+<h3 class="text-2xl font-bold mb-4">
+NARSGON
+</h3>
+
+<p>
+
+National Association of Retirees of State Government of Nigeria.
+
+</p>
+
+</div>
+
+<div>
+
+<h3 class="text-xl font-bold mb-4">
+Quick Links
+</h3>
+
+<ul class="space-y-2">
+
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#leadership">Leadership</a></li>
+<li><a href="#news">News</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3 class="text-xl font-bold mb-4">
+Resources
+</h3>
+
+<ul class="space-y-2">
+
+<li><a href="#">Membership</a></li>
+<li><a href="#">Pension Updates</a></li>
+<li><a href="#">Events</a></li>
+<li><a href="#">Support</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3 class="text-xl font-bold mb-4">
+Contact
+</h3>
+
+<p>info@narsgon.org</p>
+<p>+234 XXX XXX XXXX</p>
+
+</div>
+
+</div>
+
+<hr class="border-slate-700 my-10">
+
+<div class="text-center">
+
+<p>
+© 2026 NARSGON. All Rights Reserved.
+</p>
+
+<p class="mt-4 text-green-400 font-semibold">
+
+Website Designed & Developed by MiraCardiac
+
+</p>
+
+<p class="mt-2">
+
+<a
+href="https://miracardiacportfolio.vercel.app"
+target="_blank"
+class="text-blue-400 hover:text-blue-300">
+
+miracardiacportfolio.vercel.app
+
+</a>
+
+</p>
+
+<p class="mt-3 text-gray-400 text-sm">
+
+Open for Website Development, Mobile App Development,
+Business Websites, NGO Platforms, School Portals,
+E-Commerce Stores and Technology Partnerships.
+
+</p>
+
+</div>
+
+</div>
+
+</footer>
+
+<!-- BACK TO TOP -->
+
+<div id="backToTop" class="backToTop">
+<i class="fas fa-arrow-up"></i>
+</div>
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+/* MOBILE MENU */
+
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+menuBtn.addEventListener('click',()=>{
+
+mobileMenu.classList.toggle('hidden');
+
+});
+
+/* COUNTERS */
+
+const counters = document.querySelectorAll('.counter');
+
+counters.forEach(counter=>{
+
+const updateCounter=()=>{
+
+const target=+counter.getAttribute('data-target');
+
+const count=+counter.innerText.replace(/,/g,'');
+
+const increment=target/200;
+
+if(count<target){
+
+counter.innerText=Math.ceil(count+increment);
+
+setTimeout(updateCounter,10);
+
+}else{
+
+counter.innerText=target.toLocaleString();
+
+}
+
+};
+
+updateCounter();
+
+});
+
+/* NEWSLETTER */
+
+function subscribeNewsletter(){
+
+const email =
+document.getElementById('newsletterEmail').value;
+
+if(email===""){
+
+alert("Please enter your email address");
+
+return;
+
+}
+
+alert("Thank you for subscribing to the NARSGON Newsletter!");
+
+}
+
+/* MEMBERSHIP */
+
+function showMembershipAlert(){
+
+alert("Membership Registration Portal Coming Soon.");
+
+}
+
+/* CONTACT FORM */
+
+document
+.getElementById('contactForm')
+.addEventListener('submit',function(e){
+
+e.preventDefault();
+
+alert("Message Sent Successfully!");
+
+});
+
+/* BACK TO TOP */
+
+const backToTop =
+document.getElementById('backToTop');
+
+window.addEventListener('scroll',()=>{
+
+if(window.scrollY>300){
+
+backToTop.style.display='flex';
+
+}else{
+
+backToTop.style.display='none';
+
+}
+
+});
+
+backToTop.addEventListener('click',()=>{
+
+window.scrollTo({
+top:0,
+behavior:'smooth'
+});
+
+});
+
+</script>
+
+</body>
+</html>
