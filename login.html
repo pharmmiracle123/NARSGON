@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NARSGON | Members Login</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+overflow:hidden;
+background:
+linear-gradient(135deg,#031b12,#064e3b,#166534,#15803d,#22c55e);
+position:relative;
+}
+
+/* Animated Background */
+
+body::before{
+content:"";
+position:absolute;
+width:650px;
+height:650px;
+background:#16a34a;
+border-radius:50%;
+filter:blur(130px);
+top:-220px;
+left:-180px;
+opacity:.28;
+animation:move1 10s ease-in-out infinite;
+}
+
+body::after{
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+background:#facc15;
+border-radius:50%;
+filter:blur(120px);
+right:-180px;
+bottom:-180px;
+opacity:.18;
+animation:move2 11s ease-in-out infinite;
+}
+
+@keyframes move1{
+
+50%{
+transform:translate(40px,40px);
+}
+
+}
+
+@keyframes move2{
+
+50%{
+transform:translate(-40px,-30px);
+}
+
+}
+
+/* Floating Particles */
+
+.circle{
+position:absolute;
+border-radius:50%;
+background:rgba(255,255,255,.08);
+animation:float 8s infinite linear;
+}
+
+.circle:nth-child(1){
+width:80px;
+height:80px;
+left:8%;
+top:12%;
+}
+
+.circle:nth-child(2){
+width:120px;
+height:120px;
+right:12%;
+top:18%;
+animation-duration:11s;
+}
+
+.circle:nth-child(3){
+width:60px;
+height:60px;
+left:15%;
+bottom:18%;
+animation-duration:7s;
+}
+
+.circle:nth-child(4){
+width:100px;
+height:100px;
+right:20%;
+bottom:15%;
+animation-duration:13s;
+}
+
+@keyframes float{
+
+50%{
+transform:translateY(-25px);
+}
+
+}
+
+/* Glass Card */
+
+.login-card{
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(22px);
+
+border:1px solid rgba(255,255,255,.2);
+
+box-shadow:
+0 20px 60px rgba(0,0,0,.25);
+
+}
+
+/* Logo */
+
+.logo{
+
+width:120px;
+
+height:120px;
+
+border-radius:50%;
+
+border:5px solid white;
+
+box-shadow:0 0 35px rgba(255,255,255,.45);
+
+animation:logoFloat 3s ease-in-out infinite;
+
+}
+
+@keyframes logoFloat{
+
+50%{
+transform:translateY(-10px);
+}
+
+}
+
+/* Text Gradient */
+
+.gradient-text{
+
+background:
+linear-gradient(90deg,#ffffff,#facc15,#ffffff);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+/* Google Button */
+
+.google-btn{
+
+background:
+linear-gradient(90deg,#15803d,#16a34a,#22c55e);
+
+transition:.35s;
+
+box-shadow:
+0 12px 30px rgba(0,0,0,.25);
+
+}
+
+.google-btn:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+0 18px 35px rgba(0,0,0,.35);
+
+}
+
+/* Loader */
+
+.loader{
+
+width:30px;
+
+height:30px;
+
+border:4px solid white;
+
+border-top-color:transparent;
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+
+display:none;
+
+margin:auto;
+
+}
+
+@keyframes spin{
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+/* Footer */
+
+.footer{
+
+font-size:13px;
+
+color:rgba(255,255,255,.75);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Floating Background -->
+
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<div class="min-h-screen flex items-center justify-center px-6">
+
+<div class="login-card rounded-[35px] w-full max-w-lg p-10 relative z-10">
+
+<!-- Logo -->
+
+<div class="text-center">
+
+<img
+src="IMG-20260610-WA0055(2).jpg"
+class="logo mx-auto">
+
+<h1 class="text-5xl font-extrabold mt-7 gradient-text">
+
+NARSGON
+
+</h1>
+
+<p class="text-green-100 font-semibold mt-3 text-lg">
+
+National Association of Retirees of State Government of Nigeria
+
+</p>
+
+<p class="text-white/80 mt-5 leading-relaxed">
+
+Welcome to the Official NARSGON Members Authentication Portal.
+
+Sign in securely with your Google Account to register, monitor your application status, access member services, and receive official association updates.
+
+</p>
+
+</div>
+
+<!-- Google Button -->
+
+<button
+id="googleBtn"
+class="google-btn w-full py-4 rounded-2xl text-white font-bold text-lg mt-10">
+
+<img
+src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+class="inline w-6 mr-3">
+
+Continue with Google
+
+</button>
+
+<div id="loader" class="loader mt-6"></div>
+
+<div class="text-center mt-8">
+
+<div class="flex justify-center gap-6 text-white text-xl">
+
+<i class="fas fa-user-shield"></i>
+
+<i class="fas fa-lock"></i>
+
+<i class="fas fa-shield-heart"></i>
+
+</div>
+
+<p class="footer mt-5">
+
+Protected by Google Authentication & Firebase Security
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- PART B CONTINUES -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithPopup,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+/*========================================
+FIREBASE CONFIGURATION
+========================================*/
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDdFirFCJ3cGw2MRPSYP-t7VadYl-cciW8",
+
+authDomain: "narsgon-36e83.firebaseapp.com",
+
+projectId: "narsgon-36e83",
+
+storageBucket: "narsgon-36e83.firebasestorage.app",
+
+messagingSenderId: "577739155875",
+
+appId: "1:577739155875:web:bd672a3cacd39ab16e5216",
+
+measurementId: "G-P94PFTZG8H"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const provider = new GoogleAuthProvider();
+
+const googleBtn = document.getElementById("googleBtn");
+
+const loader = document.getElementById("loader");
+
+/*========================================
+Already Logged In
+========================================*/
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+window.location.href="form.html";
+
+}
+
+});
+
+/*========================================
+Google Login
+========================================*/
+
+googleBtn.addEventListener("click",async()=>{
+
+loader.style.display="block";
+
+googleBtn.disabled=true;
+
+googleBtn.innerHTML=`
+<i class="fas fa-spinner fa-spin mr-2"></i>
+Signing you in...
+`;
+
+try{
+
+const result=await signInWithPopup(auth,provider);
+
+const user=result.user;
+
+googleBtn.innerHTML=`
+<i class="fas fa-check-circle mr-2"></i>
+Login Successful
+`;
+
+setTimeout(()=>{
+
+window.location.href="form.html";
+
+},1200);
+
+}catch(error){
+
+loader.style.display="none";
+
+googleBtn.disabled=false;
+
+googleBtn.innerHTML=`
+
+<img
+src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+class="inline w-6 mr-3">
+
+Continue with Google
+
+`;
+
+alert(error.code+"\n\n"+error.message);
+
+}
+
+});
+
+/*========================================
+Greeting
+========================================*/
+
+const hour=new Date().getHours();
+
+let greeting="Welcome";
+
+if(hour<12){
+
+greeting="Good Morning";
+
+}else if(hour<17){
+
+greeting="Good Afternoon";
+
+}else{
+
+greeting="Good Evening";
+
+}
+
+const title=document.querySelector(".gradient-text");
+
+title.insertAdjacentHTML("afterend",
+
+`<p class="text-yellow-300 font-semibold mt-3">${greeting}, Esteemed Retiree</p>`
+
+);
+
+</script>
+
+</body>
+
+</html>
