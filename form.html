@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>NARSGON Membership Registration</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+body{
+background:linear-gradient(135deg,#0f172a,#14532d,#0f766e);
+min-height:100vh;
+}
+
+.form-card{
+backdrop-filter:blur(18px);
+background:rgba(255,255,255,.12);
+border:1px solid rgba(255,255,255,.2);
+}
+
+input,
+textarea,
+select{
+
+width:100%;
+padding:14px;
+border-radius:12px;
+outline:none;
+color:#111827;
+
+}
+
+label{
+
+display:block;
+margin-bottom:8px;
+font-weight:600;
+color:white;
+
+}
+
+.logo{
+
+width:120px;
+height:120px;
+border-radius:50%;
+margin:auto;
+border:5px solid white;
+box-shadow:0 0 25px rgba(255,255,255,.4);
+
+animation:float 3s ease-in-out infinite;
+
+}
+
+@keyframes float{
+
+0%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0);}
+
+}
+
+</style>
+
+</head>
+
+<body class="p-6">
+
+<div class="max-w-5xl mx-auto">
+
+<!-- Header -->
+
+<div class="text-center mb-8">
+
+<img
+src="IMG-20260610-WA0055(2).jpg"
+class="logo">
+
+<h1 class="text-4xl font-bold text-white mt-5">
+
+NATIONAL ASSOCIATION OF RETIREES OF STATE GOVERNMENT OF NIGERIA
+
+</h1>
+
+<p class="text-yellow-300 mt-2 text-lg">
+
+(NARSGON)
+
+</p>
+
+<p class="text-white/80">
+
+Membership Registration Portal
+
+</p>
+
+</div>
+
+<!-- Registration Form -->
+
+<div class="form-card rounded-3xl p-8 shadow-2xl">
+
+<h2 class="text-3xl font-bold text-white mb-8">
+
+Membership Application Form
+
+</h2>
+
+<form id="membershipForm">
+
+<!-- Full Name -->
+
+<div class="mb-5">
+
+<label>
+
+Full Name
+
+</label>
+
+<input
+type="text"
+id="fullName"
+placeholder="Enter Full Name"
+required>
+
+</div>
+
+<!-- Address -->
+
+<div class="mb-5">
+
+<label>
+
+Residential Address
+
+</label>
+
+<textarea
+id="address"
+rows="3"
+placeholder="Residential Address"
+required></textarea>
+
+</div>
+
+<div class="grid md:grid-cols-2 gap-5">
+
+<div>
+
+<label>
+
+Sex
+
+</label>
+
+<select id="sex" required>
+
+<option value="">
+
+Select Gender
+
+</option>
+
+<option>
+
+Male
+
+</option>
+
+<option>
+
+Female
+
+</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>
+
+Age
+
+</label>
+
+<input
+type="number"
+id="age"
+placeholder="Age"
+required>
+
+</div>
+
+</div>
+
+<div class="mt-5">
+
+<label>
+
+Phone Number
+
+</label>
+
+<input
+type="tel"
+id="phone"
+placeholder="080xxxxxxxx"
+required>
+
+</div>
+
+<div class="mt-5">
+
+<label>
+
+Next of Kin
+
+</label>
+
+<input
+type="text"
+id="nextKin"
+placeholder="Next of Kin Name"
+required>
+
+</div>
+
+<div class="mt-5">
+
+<label>
+
+Next of Kin Phone Number
+
+</label>
+
+<input
+type="tel"
+id="nextKinPhone"
+placeholder="080xxxxxxxx"
+required>
+
+</div>
+
+<div class="mt-5">
+
+<label>
+
+Name of Last Employer
+
+</label>
+
+<input
+type="text"
+id="lastEmployer"
+placeholder="Last Employer"
+required>
+
+</div>
+
+<div class="mt-5">
+
+<label>
+
+Address of Last Employer
+
+</label>
+
+<textarea
+id="employerAddress"
+rows="3"
+placeholder="Employer Address"
+required></textarea>
+
+</div>
+
+<div class="grid md:grid-cols-2 gap-5 mt-5">
+
+<div>
+
+<label>
+
+Year of Employment
+
+</label>
+
+<input
+type="number"
+id="employmentYear"
+placeholder="1990"
+required>
+
+</div>
+
+<div>
+
+<label>
+
+Rank During Employment
+
+</label>
+
+<input
+type="text"
+id="employmentRank"
+placeholder="Senior Officer"
+required>
+
+</div>
+
+</div>
+<!-- ========================================= -->
+<!-- Continue inside the same <form> -->
+<!-- ========================================= -->
+
+<div class="grid md:grid-cols-2 gap-5 mt-5">
+
+<div>
+
+<label>
+
+Year of Retirement
+
+</label>
+
+<input
+type="number"
+id="retirementYear"
+placeholder="2024"
+required>
+
+</div>
+
+<div>
+
+<label>
+
+Rank at Retirement
+
+</label>
+
+<input
+type="text"
+id="retirementRank"
+placeholder="Director"
+required>
+
+</div>
+
+</div>
+
+<!-- State of Origin -->
+
+<div class="mt-5">
+
+<label>
+
+State of Origin
+
+</label>
+
+<input
+type="text"
+id="state"
+placeholder="State of Origin"
+required>
+
+</div>
+
+<!-- LGA -->
+
+<div class="mt-5">
+
+<label>
+
+Local Government Area
+
+</label>
+
+<input
+type="text"
+id="lga"
+placeholder="Local Government Area"
+required>
+
+</div>
+
+<!-- Email -->
+
+<div class="mt-5">
+
+<label>
+
+Email Address
+
+</label>
+
+<input
+type="email"
+id="email"
+placeholder="example@email.com">
+
+</div>
+
+<!-- Declaration -->
+
+<div class="mt-8 bg-white/10 rounded-xl p-5">
+
+<h3 class="text-white text-xl font-bold mb-3">
+
+Declaration
+
+</h3>
+
+<p class="text-white/80">
+
+I hereby declare that the information supplied above is true and correct. I agree to abide by the Constitution, Rules and Regulations of the National Association of Retirees of State Government of Nigeria (NARSGON).
+
+</p>
+
+<label class="flex items-start gap-3 mt-5 text-white">
+
+<input
+type="checkbox"
+id="attestation"
+required
+class="mt-1 w-5 h-5">
+
+<span>
+
+I accept the declaration above.
+
+</span>
+
+</label>
+
+</div>
+
+<!-- Signature -->
+
+<div class="mt-6">
+
+<label>
+
+Digital Signature (Type Your Full Name)
+
+</label>
+
+<input
+type="text"
+id="signature"
+placeholder="Full Name"
+required>
+
+</div>
+
+<!-- Date -->
+
+<div class="mt-5">
+
+<label>
+
+Application Date
+
+</label>
+
+<input
+type="date"
+id="applicationDate"
+required>
+
+</div>
+
+<!-- Submit Button -->
+
+<button
+
+type="submit"
+
+class="mt-8 w-full bg-green-600 hover:bg-green-700 transition duration-300 text-white py-4 rounded-xl text-xl font-bold">
+
+Submit Membership Application
+
+</button>
+
+</form>
+
+<!-- Success Message -->
+
+<div
+
+id="status"
+
+class="hidden mt-8 bg-green-600 rounded-2xl p-6 text-white text-center">
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- Applicant Status Checker -->
+<!-- ========================================= -->
+
+<div class="form-card rounded-3xl p-8 shadow-2xl mt-8">
+
+<h2 class="text-3xl font-bold text-white mb-5">
+
+Check Membership Application
+
+</h2>
+
+<p class="text-white/70 mb-6">
+
+Enter the Membership Code issued after registration.
+
+</p>
+
+<input
+
+type="text"
+
+id="searchCode"
+
+placeholder="Example: NARSGON-2026-583291">
+
+<button
+
+id="searchBtn"
+
+class="mt-5 w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl text-lg font-bold">
+
+Check Application Status
+
+</button>
+
+<div
+
+id="applicationResult"
+
+class="hidden mt-8 bg-white rounded-2xl p-6">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- PART 2 STARTS BELOW THIS -->
+<!-- Firebase Configuration + JavaScript -->
+<!-- Do NOT close </body> or </html> yet -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+import {
+getDatabase,
+ref,
+set,
+get
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+/*==========================================
+Firebase Configuration
+==========================================*/
+
+const firebaseConfig = {
+apiKey: "AIzaSyDdFirFCJ3cGw2MRPSYP-t7VadYl-cciW8",
+authDomain: "narsgon-36e83.firebaseapp.com",
+projectId: "narsgon-36e83",
+storageBucket: "narsgon-36e83.firebasestorage.app",
+messagingSenderId: "577739155875",
+appId: "1:577739155875:web:bd672a3cacd39ab16e5216",
+measurementId: "G-P94PFTZG8H"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getDatabase(app);
+
+/*==========================================
+Authentication
+==========================================*/
+
+onAuthStateChanged(auth,(user)=>{
+
+if(!user){
+
+window.location.href="login.html";
+
+}
+
+});
+
+/*==========================================
+DOM
+==========================================*/
+
+const membershipForm=document.getElementById("membershipForm");
+
+const status=document.getElementById("status");
+
+/*==========================================
+Membership Code Generator
+==========================================*/
+
+function generateMembershipCode(){
+
+const year=new Date().getFullYear();
+
+const random=Math.floor(100000+Math.random()*900000);
+
+return `NARSGON-${year}-${random}`;
+
+}
+
+/*==========================================
+Submit Membership Form
+==========================================*/
+
+membershipForm.addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+const user=auth.currentUser;
+
+if(!user){
+
+alert("Please login first.");
+
+return;
+
+}
+
+const membershipCode=generateMembershipCode();
+
+/* Collect Form Data */
+
+const data={
+
+membershipCode:membershipCode,
+
+uid:user.uid,
+
+userEmail:user.email,
+
+fullName:document.getElementById("fullName").value,
+
+address:document.getElementById("address").value,
+
+sex:document.getElementById("sex").value,
+
+age:document.getElementById("age").value,
+
+phone:document.getElementById("phone").value,
+
+nextKin:document.getElementById("nextKin").value,
+
+nextKinPhone:document.getElementById("nextKinPhone").value,
+
+lastEmployer:document.getElementById("lastEmployer").value,
+
+employerAddress:document.getElementById("employerAddress").value,
+
+employmentYear:document.getElementById("employmentYear").value,
+
+employmentRank:document.getElementById("employmentRank").value,
+
+retirementYear:document.getElementById("retirementYear").value,
+
+retirementRank:document.getElementById("retirementRank").value,
+
+state:document.getElementById("state").value,
+
+lga:document.getElementById("lga").value,
+
+email:document.getElementById("email").value,
+
+signature:document.getElementById("signature").value,
+
+applicationDate:document.getElementById("applicationDate").value,
+
+status:"Pending",
+
+submittedAt:Date.now()
+
+};
+
+try{
+
+await set(
+
+ref(db,"membershipApplications/"+membershipCode),
+
+data
+
+);
+
+status.classList.remove("hidden");
+
+status.innerHTML=`
+
+<div class="text-5xl mb-4">
+
+✅
+
+</div>
+
+<h2 class="text-3xl font-bold">
+
+Application Submitted Successfully
+
+</h2>
+
+<p class="mt-4">
+
+Your Membership Code is
+
+</p>
+
+<div class="bg-white text-green-700 text-2xl font-bold rounded-xl p-5 mt-5">
+
+${membershipCode}
+
+</div>
+
+<p class="mt-5">
+
+Please write down or screenshot this Membership Code.
+
+You will need it to check your application status later.
+
+</p>
+
+`;
+
+membershipForm.reset();
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+});
+
+/*===============================
+PART 2B CONTINUES BELOW
+(Application Status Checker)
+===============================*/
+/*==========================================
+Application Status Checker
+==========================================*/
+
+const searchBtn=document.getElementById("searchBtn");
+
+const searchCode=document.getElementById("searchCode");
+
+const applicationResult=document.getElementById("applicationResult");
+
+searchBtn.addEventListener("click",async()=>{
+
+const code=searchCode.value.trim();
+
+if(code===""){
+
+alert("Please enter your Membership Code.");
+
+return;
+
+}
+
+try{
+
+const snapshot=await get(
+
+ref(db,"membershipApplications/"+code)
+
+);
+
+applicationResult.classList.remove("hidden");
+
+if(!snapshot.exists()){
+
+applicationResult.innerHTML=`
+
+<div class="text-center">
+
+<div class="text-5xl">
+
+❌
+
+</div>
+
+<h2 class="text-2xl font-bold text-red-600 mt-3">
+
+Application Not Found
+
+</h2>
+
+<p class="mt-3 text-gray-700">
+
+No application exists with this Membership Code.
+
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+const data=snapshot.val();
+
+let statusColor="bg-yellow-500";
+
+if(data.status==="Approved"){
+
+statusColor="bg-green-600";
+
+}
+
+if(data.status==="Rejected"){
+
+statusColor="bg-red-600";
+
+}
+
+applicationResult.innerHTML=`
+
+<h2 class="text-3xl font-bold text-center mb-6">
+
+Membership Information
+
+</h2>
+
+<div class="grid md:grid-cols-2 gap-5">
+
+<div>
+
+<strong>Membership Code</strong>
+
+<p>${data.membershipCode}</p>
+
+</div>
+
+<div>
+
+<strong>Status</strong>
+
+<p class="${statusColor} text-white px-3 py-2 rounded-lg inline-block">
+
+${data.status}
+
+</p>
+
+</div>
+
+<div>
+
+<strong>Full Name</strong>
+
+<p>${data.fullName}</p>
+
+</div>
+
+<div>
+
+<strong>Residential Address</strong>
+
+<p>${data.address}</p>
+
+</div>
+
+<div>
+
+<strong>Sex</strong>
+
+<p>${data.sex}</p>
+
+</div>
+
+<div>
+
+<strong>Age</strong>
+
+<p>${data.age}</p>
+
+</div>
+
+<div>
+
+<strong>Phone Number</strong>
+
+<p>${data.phone}</p>
+
+</div>
+
+<div>
+
+<strong>Next of Kin</strong>
+
+<p>${data.nextKin}</p>
+
+</div>
+
+<div>
+
+<strong>Next of Kin Phone</strong>
+
+<p>${data.nextKinPhone}</p>
+
+</div>
+
+<div>
+
+<strong>Last Employer</strong>
+
+<p>${data.lastEmployer}</p>
+
+</div>
+
+<div>
+
+<strong>Employer Address</strong>
+
+<p>${data.employerAddress}</p>
+
+</div>
+
+<div>
+
+<strong>Employment Year</strong>
+
+<p>${data.employmentYear}</p>
+
+</div>
+
+<div>
+
+<strong>Employment Rank</strong>
+
+<p>${data.employmentRank}</p>
+
+</div>
+
+<div>
+
+<strong>Retirement Year</strong>
+
+<p>${data.retirementYear}</p>
+
+</div>
+
+<div>
+
+<strong>Retirement Rank</strong>
+
+<p>${data.retirementRank}</p>
+
+</div>
+
+<div>
+
+<strong>State</strong>
+
+<p>${data.state}</p>
+
+</div>
+
+<div>
+
+<strong>L.G.A.</strong>
+
+<p>${data.lga}</p>
+
+</div>
+
+<div>
+
+<strong>Email</strong>
+
+<p>${data.email}</p>
+
+</div>
+
+<div>
+
+<strong>Digital Signature</strong>
+
+<p>${data.signature}</p>
+
+</div>
+
+<div>
+
+<strong>Application Date</strong>
+
+<p>${data.applicationDate}</p>
+
+</div>
+
+</div>
+
+`;
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
