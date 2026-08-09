@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NARSGON Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+body{
+  background:linear-gradient(135deg,#0f172a,#14532d,#0f766e);
+  min-height:100vh;
+}
+.card{
+  backdrop-filter:blur(18px);
+  background:rgba(255,255,255,.95);
+}
+#printArea{
+  display:none;
+}
+@media print {
+  body * { visibility: hidden; }
+  #printArea, #printArea * { visibility: visible; }
+  #printArea {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body class="p-6">
+
+<div class="max-w-6xl mx-auto">
+
+  <div class="text-center mb-8">
+    <h1 class="text-3xl font-bold text-white">NARSGON Admin Dashboard</h1>
+    <p class="text-white/70 mt-2">Manage membership applications</p>
+  </div>
+
+  <div id="accessDenied" class="hidden text-center text-white text-xl bg-red-600/80 rounded-2xl p-8">
+    Access Denied. You are not authorized to view this page.
+  </div>
+
+  <div id="adminContent" class="hidden">
+
+    <!-- Stats -->
+    <div class="grid grid-cols-4 gap-4 mb-6">
+      <div class="card rounded-2xl p-5 text-center">
+        <p class="text-3xl font-bold text-gray-800" id="totalCount">0</p>
+        <p class="text-gray-600">Total</p>
+      </div>
+      <div class="card rounded-2xl p-5 text-center">
+        <p class="text-3xl font-bold text-yellow-600" id="pendingCount">0</p>
+        <p class="text-gray-600">Pending</p>
+      </div>
+      <div class="card rounded-2xl p-5 text-center">
+        <p class="text-3xl font-bold text-green-600" id="approvedCount">0</p>
+        <p class="text-gray-600">Approved</p>
+      </div>
+      <div class="card rounded-2xl p-5 text-center">
+        <p class="text-3xl font-bold text-red-600" id="rejectedCount">0</p>
+        <p class="text-gray-600">Rejected</p>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="card rounded-2xl p-4 mb-6 flex flex-wrap gap-3 items-center">
+      <input id="searchInput" type="text" placeholder="Search by name or code..."
+        class="flex-1 min-w-[180px] p-3 rounded-xl border">
+      <select id="filterStatus" class="p-3 rounded-xl border">
+        <option value="All">All Status</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+      </select>
+      <select id="sortBy" class="p-3 rounded-xl border">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="nameAZ">Name A-Z</option>
+        <option value="nameZA">Name Z-A</option>
+      </select>
+      <button onclick="exportToExcel()"
+        class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 rounded-xl font-semibold">
+        📊 Export to Excel
+      </button>
+    </div>
+
+    <!-- Bulk actions -->
+    <div class="card rounded-2xl p-4 mb-6 flex flex-wrap gap-3 items-center">
+      <label class="flex items-center gap-2 text-gray-700 font-semibold">
+        <input type="checkbox" id="selectAll" onclick="toggleSelectAll(this)"> Select All
+      </label>
+      <span id="selectedCount" class="text-gray-500 text-sm">0 selected</span>
+      <div class="flex-1"></div>
+      <button onclick="bulkAction('Approved')"
+        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl font-semibold">
+        Approve Selected
+      </button>
+      <button onclick="bulkAction('Rejected')"
+        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl font-semibold">
+        Reject Selected
+      </button>
+    </div>
+
+    <!-- Applications list -->
+    <div id="applicationsList" class="space-y-4"></div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center gap-2 mt-6" id="pagination"></div>
+
+    <!-- Activity Log -->
+    <div class="card rounded-2xl p-5 mt-8">
+      <h3 class="text-xl font-bold text-gray-800 mb-3">🕒 Recent Activity</h3>
+      <div id="activityLog" class="text-sm text-gray-600 space-y-1 max-h-48 overflow-y-auto"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Hidden printable member card -->
+<div id="printArea"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import {
+  getAuth, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+import {
+  getDatabase, ref, onValue, update, push, set
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDdFirFCJ3cGw2MRPSYP-t7VadYl-cciW8",
+  authDomain: "narsgon-36e83.firebaseapp.com",
+  projectId: "narsgon-36e83",
+  storageBucket: "narsgon-36e83.firebasestorage.app",
+  messagingSenderId: "577739155875",
+  appId: "1:577739155875:web:bd672a3cacd39ab16e5216",
+  measurementId: "G-P94PFTZG8H"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+
+const ADMIN_EMAILS = [
+  "onyekamiracle08@gmail.com",
+  "onyekaudechukwum@gmail.com",
+  "thirdadmin@example.com" // replace with your 3rd admin email
+];
+
+let allApplications = {};
+let currentAdminEmail = "";
+let currentPage = 1;
+const PAGE_SIZE = 10;
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
+  if (!ADMIN_EMAILS.includes(user.email)) {
+    document.getElementById("accessDenied").classList.remove("hidden");
+    return;
+  }
+  currentAdminEmail = user.email;
+  document.getElementById("adminContent").classList.remove("hidden");
+  loadApplications();
+  loadActivityLog();
+});
+
+function loadApplications() {
+  onValue(ref(db, "membershipApplications"), (snapshot) => {
+    allApplications = snapshot.val() || {};
+    currentPage = 1;
+    renderApplications();
+  });
+}
+
+function loadActivityLog() {
+  onValue(ref(db, "adminLogs"), (snapshot) => {
+    const logs = snapshot.val() || {};
+    const entries = Object.values(logs).sort((a, b) => b.timestamp - a.timestamp).slice(0, 20);
+    const logDiv = document.getElementById("activityLog");
+    logDiv.innerHTML = entries.length
+      ? entries.map(l => `<p>• ${l.message} <span class="text-gray-400">— ${new Date(l.timestamp).toLocaleString()}</span></p>`).join("")
+      : `<p class="text-gray-400">No activity yet.</p>`;
+  });
+}
+
+function logActivity(message) {
+  const logRef = push(ref(db, "adminLogs"));
+  set(logRef, { message, admin: currentAdminEmail, timestamp: Date.now() });
+}
+
+function getFilteredSorted() {
+  const search = document.getElementById("searchInput").value.toLowerCase();
+  const filter = document.getElementById("filterStatus").value;
+  const sortBy = document.getElementById("sortBy").value;
+
+  let entries = Object.values(allApplications).filter(app => {
+    const matchesSearch =
+      app.fullName?.toLowerCase().includes(search) ||
+      app.membershipCode?.toLowerCase().includes(search);
+    const matchesFilter = filter === "All" || app.status === filter;
+    return matchesSearch && matchesFilter;
+  });
+
+  if (sortBy === "newest") entries.sort((a, b) => b.submittedAt - a.submittedAt);
+  if (sortBy === "oldest") entries.sort((a, b) => a.submittedAt - b.submittedAt);
+  if (sortBy === "nameAZ") entries.sort((a, b) => a.fullName.localeCompare(b.fullName));
+  if (sortBy === "nameZA") entries.sort((a, b) => b.fullName.localeCompare(a.fullName));
+
+  return entries;
+}
+
+function renderApplications() {
+  const list = document.getElementById("applicationsList");
+  const all = Object.values(allApplications);
+
+  document.getElementById("totalCount").textContent = all.length;
+  document.getElementById("pendingCount").textContent = all.filter(a => a.status === "Pending").length;
+  document.getElementById("approvedCount").textContent = all.filter(a => a.status === "Approved").length;
+  document.getElementById("rejectedCount").textContent = all.filter(a => a.status === "Rejected").length;
+
+  const entries = getFilteredSorted();
+
+  if (entries.length === 0) {
+    list.innerHTML = `<div class="card rounded-2xl p-8 text-center text-gray-500">No applications found.</div>`;
+    document.getElementById("pagination").innerHTML = "";
+    return;
+  }
+
+  const totalPages = Math.ceil(entries.length / PAGE_SIZE);
+  if (currentPage > totalPages) currentPage = totalPages;
+  const pageEntries = entries.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  list.innerHTML = pageEntries.map(app => {
+    let badgeColor = "bg-yellow-500";
+    if (app.status === "Approved") badgeColor = "bg-green-600";
+    if (app.status === "Rejected") badgeColor = "bg-red-600";
+
+    return `
+      <div class="card rounded-2xl p-5">
+        <div class="flex justify-between items-start flex-wrap gap-3">
+          <div class="flex gap-3">
+            <input type="checkbox" class="rowCheckbox mt-2 w-5 h-5" value="${app.membershipCode}" onclick="updateSelectedCount()">
+            <div>
+              <h3 class="text-xl font-bold text-gray-800">${app.fullName}</h3>
+              <p class="text-gray-500 text-sm">${app.membershipCode}</p>
+              <p class="text-gray-600 text-sm mt-1">📞 ${app.phone} | 📧 ${app.email || "N/A"}</p>
+              <p class="text-gray-600 text-sm">📍 ${app.state}, ${app.lga}</p>
+              <p class="text-gray-600 text-sm">Last Rank: ${app.retirementRank} (Retired ${app.retirementYear})</p>
+            </div>
+          </div>
+          <span class="${badgeColor} text-white px-3 py-1 rounded-lg text-sm font-bold">${app.status}</span>
+        </div>
+
+        <div class="flex gap-2 mt-4 flex-wrap">
+          <button onclick="approveApp('${app.membershipCode}')"
+            class="flex-1 min-w-[100px] bg-green-600 hover:bg-green-700 text-white py-2 rounded-xl font-semibold text-sm">
+            Approve
+          </button>
+          <button onclick="rejectApp('${app.membershipCode}')"
+            class="flex-1 min-w-[100px] bg-red-600 hover:bg-red-700 text-white py-2 rounded-xl font-semibold text-sm">
+            Reject
+          </button>
+          <button onclick="viewDetails('${app.membershipCode}')"
+            class="flex-1 min-w-[100px] bg-gray-600 hover:bg-gray-700 text-white py-2 rounded-xl font-semibold text-sm">
+            Details
+          </button>
+          <button onclick="printCard('${app.membershipCode}')"
+            class="flex-1 min-w-[100px] bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-xl font-semibold text-sm">
+            🪪 Print Card
+          </button>
+          <button onclick="deleteApp('${app.membershipCode}')"
+            class="flex-1 min-w-[100px] bg-gray-400 hover:bg-gray-500 text-white py-2 rounded-xl font-semibold text-sm">
+            Delete
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  renderPagination(totalPages);
+  updateSelectedCount();
+}
+
+function renderPagination(totalPages) {
+  const pag = document.getElementById("pagination");
+  if (totalPages <= 1) { pag.innerHTML = ""; return; }
+  let html = "";
+  for (let i = 1; i <= totalPages; i++) {
+    html += `<button onclick="goToPage(${i})" class="w-10 h-10 rounded-lg font-semibold ${i === currentPage ? 'bg-white text-gray-900' : 'bg-white/20 text-white'}">${i}</button>`;
+  }
+  pag.innerHTML = html;
+}
+
+window.goToPage = (p) => { currentPage = p; renderApplications(); };
+
+window.toggleSelectAll = (checkbox) => {
+  document.querySelectorAll(".rowCheckbox").forEach(cb => cb.checked = checkbox.checked);
+  updateSelectedCount();
+};
+
+window.updateSelectedCount = () => {
+  const checked = document.querySelectorAll(".rowCheckbox:checked").length;
+  document.getElementById("selectedCount").textContent = `${checked} selected`;
+};
+
+window.bulkAction = async (status) => {
+  const checked = [...document.querySelectorAll(".rowCheckbox:checked")].map(cb => cb.value);
+  if (checked.length === 0) { alert("No applications selected."); return; }
+  if (!confirm(`${status} ${checked.length} application(s)?`)) return;
+
+  for (const code of checked) {
+    await update(ref(db, "membershipApplications/" + code), { status });
+  }
+  logActivity(`Bulk ${status.toLowerCase()} ${checked.length} application(s)`);
+};
+
+window.approveApp = async (code) => {
+  await update(ref(db, "membershipApplications/" + code), { status: "Approved" });
+  logActivity(`Approved ${allApplications[code].fullName} (${code})`);
+};
+
+window.rejectApp = async (code) => {
+  await update(ref(db, "membershipApplications/" + code), { status: "Rejected" });
+  logActivity(`Rejected ${allApplications[code].fullName} (${code})`);
+};
+
+window.deleteApp = async (code) => {
+  if (!confirm("Permanently delete this application? This cannot be undone.")) return;
+  await set(ref(db, "membershipApplications/" + code), null);
+  logActivity(`Deleted application ${code}`);
+};
+
+window.viewDetails = (code) => {
+  const app = allApplications[code];
+  alert(
+    `Full Name: ${app.fullName}\n` +
+    `Address: ${app.address}\n` +
+    `Sex: ${app.sex}, Age: ${app.age}\n` +
+    `Next of Kin: ${app.nextKin} (${app.nextKinPhone})\n` +
+    `Last Employer: ${app.lastEmployer}\n` +
+    `Employer Address: ${app.employerAddress}\n` +
+    `Employment: ${app.employmentYear} - ${app.employmentRank}\n` +
+    `Retirement: ${app.retirementYear} - ${app.retirementRank}\n` +
+    `Signature: ${app.signature}\n` +
+    `Date Applied: ${app.applicationDate}`
+  );
+};
+
+/* ==========================================
+   PRINT ID CARD (with passport photo box)
+========================================== */
+window.printCard = (code) => {
+  const app = allApplications[code];
+  const printArea = document.getElementById("printArea");
+
+  printArea.innerHTML = `
+    <div style="width:340px;padding:20px;border:3px solid #14532d;border-radius:16px;font-family:sans-serif;margin:20px auto;">
+      <h2 style="text-align:center;color:#14532d;margin-bottom:15px;">NARSGON MEMBER ID</h2>
+
+      <!-- Passport photo box -->
+      <div style="width:110px;height:130px;border:2px dashed #14532d;border-radius:8px;margin:0 auto 15px auto;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f3f4f6;">
+        ${app.photoUrl
+          ? `<img src="${app.photoUrl}" style="width:100%;height:100%;object-fit:cover;">`
+          : `<span style="color:#9ca3af;font-size:12px;text-align:center;">Passport<br>Photo</span>`
+        }
+      </div>
+
+      <p><strong>Name:</strong> ${app.fullName}</p>
+      <p><strong>Code:</strong> ${app.membershipCode}</p>
+      <p><strong>Status:</strong> ${app.status}</p>
+      <p><strong>State:</strong> ${app.state}, ${app.lga}</p>
+      <p><strong>Phone:</strong> ${app.phone}</p>
+      <p><strong>Retired:</strong> ${app.retirementYear} - ${app.retirementRank}</p>
+    </div>
+  `;
+
+  // Force visible with inline style, not just the class
+  printArea.style.display = "block";
+
+  // Give the browser time to actually render before printing
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => {
+      printArea.style.display = "none";
+    }, 500);
+  }, 250);
+};
+
+window.exportToExcel = () => {
+  const entries = getFilteredSorted();
+  if (entries.length === 0) { alert("No data to export."); return; }
+
+  const rows = entries.map(app => ({
+    "Membership Code": app.membershipCode,
+    "Status": app.status,
+    "Full Name": app.fullName,
+    "Sex": app.sex,
+    "Age": app.age,
+    "Phone": app.phone,
+    "Email": app.email || "",
+    "Address": app.address,
+    "State": app.state,
+    "LGA": app.lga,
+    "Next of Kin": app.nextKin,
+    "Next of Kin Phone": app.nextKinPhone,
+    "Last Employer": app.lastEmployer,
+    "Employer Address": app.employerAddress,
+    "Employment Year": app.employmentYear,
+    "Employment Rank": app.employmentRank,
+    "Retirement Year": app.retirementYear,
+    "Retirement Rank": app.retirementRank,
+    "Signature": app.signature,
+    "Application Date": app.applicationDate
+  }));
+
+  const worksheet = XLSX.utils.json_to_sheet(rows);
+  const workbook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Members");
+  XLSX.writeFile(workbook, `NARSGON_Members_${new Date().toISOString().slice(0,10)}.xlsx`);
+
+  logActivity(`Exported ${rows.length} record(s) to Excel`);
+};
+
+document.getElementById("searchInput").addEventListener("input", () => { currentPage = 1; renderApplications(); });
+document.getElementById("filterStatus").addEventListener("change", () => { currentPage = 1; renderApplications(); });
+document.getElementById("sortBy").addEventListener("change", renderApplications);
+</script>
+
+</body>
+</html>
